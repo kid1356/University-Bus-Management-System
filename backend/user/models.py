@@ -37,7 +37,7 @@ class Manager(BaseUserManager):
 class User(AbstractBaseUser):
     ROLE_CHOICES = (
         ('Student','student'),
-        ('University_admin','university_admin')
+        ('University admin','university admin')
     )
 
     email = models.EmailField(max_length=254,unique=True)
@@ -47,6 +47,7 @@ class User(AbstractBaseUser):
     role = models.CharField(max_length=20,choices=ROLE_CHOICES,null=True,blank=True)
     university = models.ForeignKey('University', on_delete= models.CASCADE,null= True, blank=True)
     otp = models.CharField(max_length=10, null=True,blank=True)
+    otp_created_at= models.DateTimeField(null= True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin =models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
